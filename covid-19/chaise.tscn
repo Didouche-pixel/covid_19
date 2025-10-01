@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://brxy3wewebndo"]
+
+[ext_resource type="ArrayMesh" uid="uid://cpc7s53msr6at" path="res://import/kaykit_city_builder_bits/Assets/obj/bench.obj" id="1_2riyt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fh4pv"]
+
+[node name="chaise" type="StaticBody3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 15.965399, 0)
+mesh = ExtResource("1_2riyt")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_fh4pv")
+metadata/_edit_lock_ = true

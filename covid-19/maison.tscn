@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6c0ee4r52gtu"]
+
+[ext_resource type="ArrayMesh" uid="uid://b6twbi5ip7b2t" path="res://import/kaykit_city_builder_bits/Assets/obj/building_E_withoutBase.obj" id="1_5ne08"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3cong"]
+
+[node name="Maison" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 21.58268, -0.7578659, -12.188358)
+mesh = ExtResource("1_5ne08")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_3cong")
+metadata/_edit_lock_ = true

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bn34x0ivdo6xs"]
+
+[ext_resource type="ArrayMesh" uid="uid://8keuhyw8op4m" path="res://import/kaykit_city_builder_bits/Assets/obj/bush.obj" id="1_gablb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qn361"]
+
+[node name="Arbre" type="StaticBody3D"]
+transform = Transform3D(4.9882727, 0, -0.342253, 0, 5, 0, 0.342253, 0, 4.9882727, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_gablb")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_qn361")
+metadata/_edit_lock_ = true

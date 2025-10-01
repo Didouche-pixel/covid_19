@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ddbmk04j5s6bg"
+path="res://.godot/imported/Business Man.obj-e0e7d18dba17dfce59b2a29ec4de8494.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Business Man.obj-e0e7d18dba17dfce59b2a29ec4de8494.mesh"]
+
+source_file="res://import/kaykit_city_builder_bits/Assets/image/Business Man/Business Man.obj"
+dest_files=["res://.godot/imported/Business Man.obj-e0e7d18dba17dfce59b2a29ec4de8494.mesh", "res://.godot/imported/Business Man.obj-e0e7d18dba17dfce59b2a29ec4de8494.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
