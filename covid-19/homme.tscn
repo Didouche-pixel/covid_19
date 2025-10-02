@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://bc1t71ig0v6ow"]
+
+[ext_resource type="Script" uid="uid://isjgswga3bg" path="res://homme.gd" id="1_2ftxc"]
+[ext_resource type="ArrayMesh" uid="uid://ddbmk04j5s6bg" path="res://import/kaykit_city_builder_bits/Assets/image/Business Man/Business Man.obj" id="1_vf6oh"]
+[ext_resource type="Texture2D" uid="uid://lhl37h7q0wc2" path="res://import/kaykit_city_builder_bits/Assets/image/Business Man/Business-Man.png" id="2_pj6no"]
+[ext_resource type="Texture2D" uid="uid://dxuaa6b55novc" path="res://import/kaykit_city_builder_bits/Assets/image/Coffin/Dead.png" id="3_uiqgn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n1njy"]
+
+[node name="homme" type="RigidBody3D"]
+script = ExtResource("1_2ftxc")
+tex_human = ExtResource("2_pj6no")
+tex_cadaver = ExtResource("3_uiqgn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+mesh = ExtResource("1_vf6oh")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_n1njy")
+metadata/_edit_lock_ = true

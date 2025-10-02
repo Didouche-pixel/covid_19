@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcq753thu1fuy"]
+
+[ext_resource type="ArrayMesh" uid="uid://dla365r3wwvmy" path="res://import/kaykit_city_builder_bits/Assets/image/Coffin/Skull.obj" id="1_8f3xj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_unegr"]
+
+[node name="Dead" type="RigidBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.9973005, 0, 0.073429674, -0.07338212, -0.035980962, 0.99665457, 0.0026420704, -0.9993526, -0.035883833, -1.1974672, -0.34435093, 5.117743)
+mesh = ExtResource("1_8f3xj")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_unegr")
+metadata/_edit_lock_ = true

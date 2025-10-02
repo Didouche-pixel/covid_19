@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://vdslhjufhj30"]
+[gd_scene load_steps=22 format=3 uid="uid://vdslhjufhj30"]
 
 [ext_resource type="PackedScene" uid="uid://c6c0ee4r52gtu" path="res://maison.tscn" id="1_aedqi"]
+[ext_resource type="Script" uid="uid://cog57rdsagpmv" path="res://covid_19.gd" id="1_yswbq"]
 [ext_resource type="PackedScene" uid="uid://bn34x0ivdo6xs" path="res://arbre.tscn" id="2_56hpb"]
 [ext_resource type="PackedScene" uid="uid://brxy3wewebndo" path="res://chaise.tscn" id="3_kduf5"]
 [ext_resource type="PackedScene" uid="uid://dv0hsbklcb0oi" path="res://cabanne.tscn" id="3_n2a5c"]
@@ -8,9 +9,11 @@
 [ext_resource type="ArrayMesh" uid="uid://b02n1v2gvwigv" path="res://import/kaykit_city_builder_bits/Assets/obj/car_police.obj" id="6_52th1"]
 [ext_resource type="ArrayMesh" uid="uid://3fwolriiqd1v" path="res://import/kaykit_city_builder_bits/Assets/obj/car_hatchback.obj" id="7_1y085"]
 [ext_resource type="ArrayMesh" uid="uid://r3fe347ex0d0" path="res://import/kaykit_city_builder_bits/Assets/obj/car_stationwagon.obj" id="8_n1njy"]
-[ext_resource type="ArrayMesh" uid="uid://ddbmk04j5s6bg" path="res://import/kaykit_city_builder_bits/Assets/image/Business Man/Business Man.obj" id="9_1y085"]
-[ext_resource type="ArrayMesh" uid="uid://dla365r3wwvmy" path="res://import/kaykit_city_builder_bits/Assets/image/Coffin/Skull.obj" id="10_miv5g"]
-[ext_resource type="ArrayMesh" uid="uid://c0603p43yyaq4" path="res://import/kaykit_city_builder_bits/Assets/image/Virus/Virus.obj" id="11_dux78"]
+[ext_resource type="PackedScene" uid="uid://bc1t71ig0v6ow" path="res://homme.tscn" id="10_dml7c"]
+[ext_resource type="PackedScene" uid="uid://dcq753thu1fuy" path="res://dead.tscn" id="12_qpkml"]
+[ext_resource type="Script" uid="uid://bl8wf04nlp63l" path="res://dead.gd" id="13_uwt4p"]
+[ext_resource type="PackedScene" uid="uid://bc3kaywkihybm" path="res://virus.tscn" id="14_djjym"]
+[ext_resource type="Script" uid="uid://beqh14dfkwc3j" path="res://virus.gd" id="15_thqg7"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_vvruo"]
 size = Vector3(50, 0.1, 50)
@@ -28,9 +31,8 @@ albedo_color = Color(0.99999994, 0.7433326, 0.46536702, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rcbta"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_n1njy"]
-
 [node name="Covid19" type="Node3D"]
+script = ExtResource("1_yswbq")
 
 [node name="Quartier" type="StaticBody3D" parent="."]
 
@@ -142,27 +144,10 @@ mesh = ExtResource("8_n1njy")
 shape = SubResource("BoxShape3D_rcbta")
 metadata/_edit_lock_ = true
 
-[node name="homme" type="RigidBody3D" parent="."]
+[node name="homme" parent="." instance=ExtResource("10_dml7c")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="homme"]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
-mesh = ExtResource("9_1y085")
+[node name="Dead" parent="." instance=ExtResource("12_qpkml")]
+script = ExtResource("13_uwt4p")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="homme"]
-shape = SubResource("BoxShape3D_n1njy")
-
-[node name="Dead" type="RigidBody3D" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Dead"]
-transform = Transform3D(0.9973005, 0, 0.073429674, -0.07338212, -0.035980962, 0.99665457, 0.0026420704, -0.9993526, -0.035883833, -1.1974672, -0.34435093, 5.117743)
-mesh = ExtResource("10_miv5g")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Dead"]
-
-[node name="Virus" type="RigidBody3D" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Virus"]
-transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 8.59433)
-mesh = ExtResource("11_dux78")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Virus"]
+[node name="Virus" parent="." instance=ExtResource("14_djjym")]
+script = ExtResource("15_thqg7")
