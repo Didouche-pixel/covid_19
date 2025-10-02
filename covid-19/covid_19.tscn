@@ -1,7 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://vdslhjufhj30"]
+[gd_scene load_steps=21 format=3 uid="uid://vdslhjufhj30"]
 
 [ext_resource type="PackedScene" uid="uid://c6c0ee4r52gtu" path="res://maison.tscn" id="1_aedqi"]
-[ext_resource type="Script" uid="uid://cog57rdsagpmv" path="res://covid_19.gd" id="1_yswbq"]
+[ext_resource type="Script" path="res://covid_19.gd" id="1_yswbq"]
 [ext_resource type="PackedScene" uid="uid://bn34x0ivdo6xs" path="res://arbre.tscn" id="2_56hpb"]
 [ext_resource type="PackedScene" uid="uid://brxy3wewebndo" path="res://chaise.tscn" id="3_kduf5"]
 [ext_resource type="PackedScene" uid="uid://dv0hsbklcb0oi" path="res://cabanne.tscn" id="3_n2a5c"]
@@ -10,10 +10,9 @@
 [ext_resource type="ArrayMesh" uid="uid://3fwolriiqd1v" path="res://import/kaykit_city_builder_bits/Assets/obj/car_hatchback.obj" id="7_1y085"]
 [ext_resource type="ArrayMesh" uid="uid://r3fe347ex0d0" path="res://import/kaykit_city_builder_bits/Assets/obj/car_stationwagon.obj" id="8_n1njy"]
 [ext_resource type="PackedScene" uid="uid://bc1t71ig0v6ow" path="res://homme.tscn" id="10_dml7c"]
-[ext_resource type="PackedScene" uid="uid://dcq753thu1fuy" path="res://dead.tscn" id="12_qpkml"]
-[ext_resource type="Script" uid="uid://bl8wf04nlp63l" path="res://dead.gd" id="13_uwt4p"]
+[ext_resource type="PackedScene" path="res://dead.tscn" id="12_qpkml"]
+[ext_resource type="Script" path="res://dead.gd" id="13_uwt4p"]
 [ext_resource type="PackedScene" uid="uid://bc3kaywkihybm" path="res://virus.tscn" id="14_djjym"]
-[ext_resource type="Script" uid="uid://beqh14dfkwc3j" path="res://virus.gd" id="15_thqg7"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_vvruo"]
 size = Vector3(50, 0.1, 50)
@@ -34,7 +33,7 @@ albedo_color = Color(0.99999994, 0.7433326, 0.46536702, 1)
 [node name="Covid19" type="Node3D"]
 script = ExtResource("1_yswbq")
 
-[node name="Quartier" type="StaticBody3D" parent="."]
+[node name="Quartier" type="StaticBody3D" parent="." groups=["Dead", "virus"]]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Quartier"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37065792, -0.60229325, 0.3277073)
@@ -150,4 +149,3 @@ metadata/_edit_lock_ = true
 script = ExtResource("13_uwt4p")
 
 [node name="Virus" parent="." instance=ExtResource("14_djjym")]
-script = ExtResource("15_thqg7")

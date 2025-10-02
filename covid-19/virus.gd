@@ -9,10 +9,10 @@ extends RigidBody3D
 @export var tex_virus: Texture2D
 
 # Bornes (zone de jeu)
-var min_x: float = -50.0
-var max_x: float =  50.0
-var min_z: float = -50.0
-var max_z: float =  50.0
+var min_x: float = -1.0
+var max_x: float =  1.0
+var min_z: float = -1.0
+var max_z: float =  1.0
 
 # Référence au Mesh
 @onready var mesh: MeshInstance3D = $MeshInstance3D
