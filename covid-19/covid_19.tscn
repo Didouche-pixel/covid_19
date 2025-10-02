@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://vdslhjufhj30"]
+[gd_scene load_steps=20 format=3 uid="uid://vdslhjufhj30"]
 
 [ext_resource type="PackedScene" uid="uid://c6c0ee4r52gtu" path="res://maison.tscn" id="1_aedqi"]
 [ext_resource type="PackedScene" uid="uid://bn34x0ivdo6xs" path="res://arbre.tscn" id="2_56hpb"]
@@ -9,6 +9,8 @@
 [ext_resource type="ArrayMesh" uid="uid://3fwolriiqd1v" path="res://import/kaykit_city_builder_bits/Assets/obj/car_hatchback.obj" id="7_1y085"]
 [ext_resource type="ArrayMesh" uid="uid://r3fe347ex0d0" path="res://import/kaykit_city_builder_bits/Assets/obj/car_stationwagon.obj" id="8_n1njy"]
 [ext_resource type="ArrayMesh" uid="uid://ddbmk04j5s6bg" path="res://import/kaykit_city_builder_bits/Assets/image/Business Man/Business Man.obj" id="9_1y085"]
+[ext_resource type="ArrayMesh" uid="uid://dla365r3wwvmy" path="res://import/kaykit_city_builder_bits/Assets/image/Coffin/Skull.obj" id="10_miv5g"]
+[ext_resource type="ArrayMesh" uid="uid://c0603p43yyaq4" path="res://import/kaykit_city_builder_bits/Assets/image/Virus/Virus.obj" id="11_dux78"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_vvruo"]
 size = Vector3(50, 0.1, 50)
@@ -33,7 +35,7 @@ albedo_color = Color(0.99999994, 0.7433326, 0.46536702, 1)
 [node name="Quartier" type="StaticBody3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Quartier"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3664503, -0.5317478, 0.28698158)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37065792, -0.60229325, 0.3277073)
 mesh = SubResource("BoxMesh_vvruo")
 surface_material_override/0 = SubResource("StandardMaterial3D_72vv4")
 
@@ -140,11 +142,27 @@ mesh = ExtResource("8_n1njy")
 shape = SubResource("BoxShape3D_rcbta")
 metadata/_edit_lock_ = true
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
+[node name="homme" type="RigidBody3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="homme"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 mesh = ExtResource("9_1y085")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="homme"]
 shape = SubResource("BoxShape3D_n1njy")
+
+[node name="Dead" type="RigidBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Dead"]
+transform = Transform3D(0.9973005, 0, 0.073429674, -0.07338212, -0.035980962, 0.99665457, 0.0026420704, -0.9993526, -0.035883833, -1.1974672, -0.34435093, 5.117743)
+mesh = ExtResource("10_miv5g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dead"]
+
+[node name="Virus" type="RigidBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Virus"]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 8.59433)
+mesh = ExtResource("11_dux78")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Virus"]

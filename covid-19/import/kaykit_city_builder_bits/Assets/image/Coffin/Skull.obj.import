@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dla365r3wwvmy"
+path="res://.godot/imported/Skull.obj-1729fb8487918946ecf8ae4c1b6fd789.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Skull.obj-1729fb8487918946ecf8ae4c1b6fd789.mesh"]
+
+source_file="res://import/kaykit_city_builder_bits/Assets/image/Coffin/Skull.obj"
+dest_files=["res://.godot/imported/Skull.obj-1729fb8487918946ecf8ae4c1b6fd789.mesh", "res://.godot/imported/Skull.obj-1729fb8487918946ecf8ae4c1b6fd789.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
