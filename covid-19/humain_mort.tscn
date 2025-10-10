@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://t220kc844oc0"]
+
+[ext_resource type="Script" uid="uid://bm3eg6t3y8yiq" path="res://humain_mort.gd" id="1_27ncu"]
+[ext_resource type="ArrayMesh" uid="uid://dla365r3wwvmy" path="res://addons/kaykit_city_builder_bits/Assets/image/Coffin/Skull.obj" id="1_v5otn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w48qg"]
+albedo_color = Color(1.2852054, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ycdy4"]
+
+[node name="Humain_mort" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.27538574, 0.9613338, 0, -0.9613338, 0.27538574, 0, 0, 0)
+script = ExtResource("1_27ncu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
+mesh = ExtResource("1_v5otn")
+surface_material_override/0 = SubResource("StandardMaterial3D_w48qg")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ycdy4")
+metadata/_edit_lock_ = true

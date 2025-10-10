@@ -1,0 +1,128 @@
+[gd_scene load_steps=12 format=3 uid="uid://rv83foyuqwap"]
+
+[ext_resource type="PackedScene" uid="uid://d2p2b1x135t54" path="res://zombie.tscn" id="1_3xhd6"]
+[ext_resource type="Script" path="res://main.gd" id="1_4bfd1"]
+[ext_resource type="Script" path="res://addons/goutte.camera.trackball/trackball_camera.gd" id="1_o4wdc"]
+[ext_resource type="PackedScene" uid="uid://c0vnof6r7l7jx" path="res://humain.tscn" id="2_5xkj4"]
+[ext_resource type="ArrayMesh" uid="uid://b5vtxed88yk3u" path="res://addons/kaykit_city_builder_bits/Assets/obj/road_straight.obj" id="4_feam6"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cbsfl"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_b266d"]
+radius = 0.500525
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gol6v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_70kl4"]
+albedo_color = Color(0.431373, 0.0392157, 0.933333, 0.0431373)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ovgec"]
+material = SubResource("StandardMaterial3D_70kl4")
+size = Vector2(50, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qc75k"]
+size = Vector3(1, 0.984497, 1)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_4bfd1")
+
+[node name="Z" type="Label" parent="."]
+anchors_preset = -1
+anchor_right = 0.219
+anchor_bottom = 0.156
+offset_left = -2.0
+offset_top = -5.0
+offset_right = -0.28801
+offset_bottom = -0.0880051
+text = "Zombies: 0
+Huamins: 0"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.744603, 0.667508, 0, -0.667508, 0.744603, 0, 5.3755, 7.92645)
+
+[node name="TrackballCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.871522, 0.490356, 0, -0.490356, 0.871522, 0.556204, 18.0321, 33.7331)
+script = ExtResource("1_o4wdc")
+
+[node name="Zombie" parent="." instance=ExtResource("1_3xhd6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.35364, 1.00117, 7.12386)
+physics_material_override = SubResource("PhysicsMaterial_cbsfl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Zombie"]
+shape = SubResource("CylinderShape3D_b266d")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Zombie"]
+metadata/_edit_lock_ = true
+
+[node name="Zombie4" parent="." instance=ExtResource("1_3xhd6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.367, 1.00117, 9.00773)
+physics_material_override = SubResource("PhysicsMaterial_cbsfl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Zombie4"]
+shape = SubResource("CylinderShape3D_b266d")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Zombie4"]
+metadata/_edit_lock_ = true
+
+[node name="Zombie3" parent="." instance=ExtResource("1_3xhd6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5436, 1.00117, 9.60235)
+physics_material_override = SubResource("PhysicsMaterial_cbsfl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Zombie3"]
+shape = SubResource("CylinderShape3D_b266d")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Zombie3"]
+metadata/_edit_lock_ = true
+
+[node name="Zombie2" parent="." instance=ExtResource("1_3xhd6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.54827, 1.00117, 15.8626)
+physics_material_override = SubResource("PhysicsMaterial_cbsfl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Zombie2"]
+shape = SubResource("CylinderShape3D_b266d")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Zombie2"]
+metadata/_edit_lock_ = true
+
+[node name="humain" parent="." instance=ExtResource("2_5xkj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.28337, 0.0219509, -8.16813)
+
+[node name="humain5" parent="." instance=ExtResource("2_5xkj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.71554, 0, -11.3198)
+
+[node name="humain4" parent="." instance=ExtResource("2_5xkj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.86698, 0, 0.0938053)
+
+[node name="humain3" parent="." instance=ExtResource("2_5xkj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9964, 0, 11.7307)
+
+[node name="humain2" parent="." instance=ExtResource("2_5xkj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6833, 0, -6.67163)
+
+[node name="Sol" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sol"]
+transform = Transform3D(18.7939, -6.8404, 0, 6.42788, 17.6604, -6.8404, 2.33956, 6.42788, 18.7939, -15.1947, 0, 8.98)
+shape = SubResource("BoxShape3D_gol6v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Sol"]
+mesh = SubResource("PlaneMesh_ovgec")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 20, 0.192937, 0, -1.44983)
+mesh = ExtResource("4_feam6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(6, 0, 0, 0, 0.5, 0, 0, 0, 40, 0.151758, 0.359006, -1.43566)
+shape = SubResource("BoxShape3D_qc75k")
+
+[connection signal="body_entered" from="Zombie" to="humain" method="_on_zombie_body_entered"]
+[connection signal="body_entered" from="Zombie4" to="humain" method="_on_zombie_body_entered"]
+[connection signal="body_entered" from="Zombie3" to="humain" method="_on_zombie_body_entered"]
+[connection signal="body_entered" from="Zombie2" to="humain" method="_on_zombie_body_entered"]

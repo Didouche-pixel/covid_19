@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://c0vnof6r7l7jx"]
+
+[ext_resource type="Script" path="res://humain.gd" id="1_5u7gc"]
+[ext_resource type="PackedScene" uid="uid://bte52qdvsxly0" path="res://human (1).glb" id="2_wen51"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8wjxm"]
+size = Vector3(1, 1.73547, 1.09076)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xg7et"]
+albedo_color = Color(1, 1, 0.117647, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_f4vmk"]
+material = SubResource("StandardMaterial3D_xg7et")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xvlrg"]
+albedo_color = Color(1, 0.0705882, 0.113725, 1)
+
+[node name="humain" type="RigidBody3D"]
+collision_priority = 2.0
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+contact_monitor = true
+max_contacts_reported = 2
+script = ExtResource("1_5u7gc")
+
+[node name="human (1)" parent="." instance=ExtResource("2_wen51")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.367737, -0.109955)
+shape = SubResource("BoxShape3D_8wjxm")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.524383, 0)
+visible = false
+mesh = SubResource("BoxMesh_f4vmk")
+surface_material_override/0 = SubResource("StandardMaterial3D_xvlrg")
+metadata/_edit_lock_ = true

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://vo0uci4diksk"]
+
+[ext_resource type="PackedScene" uid="uid://bte52qdvsxly0" path="res://human (1).glb" id="1_a746e"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="human (1)" parent="." instance=ExtResource("1_a746e")]
