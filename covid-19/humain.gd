@@ -64,13 +64,40 @@ func _process(delta: float) -> void:
 	apply_central_impulse(direction * speed)
 
 # --- COLORATION ROUGE AU TOUCHER ---
+# --- COLORATION ROUGE AU TOUCHER ---
+#func mark_hit() -> void:
+#if is_zombie:
+# return
+#print("Humain touché ! Devient rouge.")
+#_tint_meshes(self, Color(1, 0, 0))
+#if _restore_after_sec > 0.0:
+#_hit_timer.start(_restore_after_sec)
+# --- COLORATION ROUGE AU TOUCHER ---
 func mark_hit() -> void:
 	if is_zombie:
 		return
-	print("Humain touché ! Devient rouge.")
-	_tint_meshes(self, Color(1, 0, 0))
-	if _restore_after_sec > 0.0:
-		_hit_timer.start(_restore_after_sec)
+	print("Humain touché ! Instance d'un humain mort.")
+
+	# Création et ajout de l'humain mort
+	var humain_mort_scene := preload("res://humain_mort.tscn")
+	var humain_mort: Node3D = humain_mort_scene.instantiate()
+	humain_mort.global_transform = global_transform
+	get_parent().add_child(humain_mort)
+
+# --- Position couchée ---
+	var rotation_couchee: Vector3 = humain_mort.rotation
+	rotation_couchee.x = deg_to_rad(-90.0) # mets -90 selon l'orientation de ton modèle	
+	humain_mort.rotation = rotation_couchee
+
+	# Ajuste pour toucher le sol (valeur à adapter à ton mesh)
+	humain_mort.position.y -= -0.5
+
+	# Teinte en rouge (même effet qu'avant)
+	_tint_meshes(humain_mort, Color(1.0, 0.0, 0.0, 1.0))
+
+	# On supprime l'humain vivant
+	queue_free()
+
 
 # Teinte récursivement toutes les MeshInstance3D sous ce nœud
 func _tint_meshes(node: Node, color: Color) -> void:
