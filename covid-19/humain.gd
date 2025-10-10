@@ -14,7 +14,7 @@ var min_z: float = -50
 var max_z: float = 50
 
 # --- États ---
-var is_zombie: bool = false        # gardé si tu veux réutiliser plus tard
+var is_virus: bool = false        # gardé si tu veux réutiliser plus tard
 var following_human: Node = null
 
 # --- Timer optionnel pour revenir à la couleur d’origine ---
@@ -54,27 +54,17 @@ func _process(delta: float) -> void:
 			choose_new_direction()
 			time_since_change = 0.0
 
-	# Fuite si un zombie proche
-	if is_zombie_detected():
-		flee_from_zombie()
+	# Fuite si un virus proche
+	if is_virus_detected():
+		flee_from_virus()
 
 	# Tourner et avancer
 	var rotation_torque := (direction.cross(Vector3.UP)).normalized() * turn_speed
 	apply_torque_impulse(rotation_torque)
 	apply_central_impulse(direction * speed)
 
-# --- COLORATION ROUGE AU TOUCHER ---
-# --- COLORATION ROUGE AU TOUCHER ---
-#func mark_hit() -> void:
-#if is_zombie:
-# return
-#print("Humain touché ! Devient rouge.")
-#_tint_meshes(self, Color(1, 0, 0))
-#if _restore_after_sec > 0.0:
-#_hit_timer.start(_restore_after_sec)
-# --- COLORATION ROUGE AU TOUCHER ---
 func mark_hit() -> void:
-	if is_zombie:
+	if is_virus:
 		return
 	print("Humain touché ! Instance d'un humain mort.")
 
@@ -122,41 +112,41 @@ func _tint_meshes(node: Node, color: Color) -> void:
 		_tint_meshes(child, color)
 
 # --- Comportements existants utiles ---
-func is_zombie_detected() -> bool:
-	var zombies := get_tree().get_nodes_in_group("zombies")
-	for zombie in zombies:
-		if zombie.is_inside_tree() and global_transform.origin.distance_to(zombie.global_transform.origin) < 10.0:
+func is_virus_detected() -> bool:
+	var virus := get_tree().get_nodes_in_group("virus")
+	for viru in virus:
+		if viru.is_inside_tree() and global_transform.origin.distance_to(viru.global_transform.origin) < 10.0:
 			return true
 	return false
 
-func flee_from_zombie() -> void:
-	var direction_to_flee := (global_transform.origin - get_closest_zombie_position()).normalized()
+func flee_from_virus() -> void:
+	var direction_to_flee := (global_transform.origin - get_closest_virus_position()).normalized()
 	direction = direction_to_flee
 
-func get_closest_zombie_position() -> Vector3:
-	var closest_zombie_pos := global_transform.origin
+func get_closest_virus_position() -> Vector3:
+	var closest_viru_pos := global_transform.origin
 	var closest_distance := 1e6
-	var zombies := get_tree().get_nodes_in_group("zombies")
-	for zombie in zombies:
-		if zombie.is_inside_tree():
-			var d := global_transform.origin.distance_to(zombie.global_transform.origin)
+	var virus := get_tree().get_nodes_in_group("virus")
+	for viru in virus:
+		if viru.is_inside_tree():
+			var d := global_transform.origin.distance_to(viru.global_transform.origin)
 			if d < closest_distance:
 				closest_distance = d
-				closest_zombie_pos = zombie.global_transform.origin
-	return closest_zombie_pos
+				closest_viru_pos = viru.global_transform.origin
+	return closest_viru_pos
 
 func _on_body_entered(body: Node) -> void:
-	if body.is_in_group("zombies"):
-		print("Zombie a touché un humain")
-		mark_hit() # <<< au lieu de become_zombie()
+	if body.is_in_group("virus"):
+		print("Virus a touché un humain")
+		mark_hit() # <<< au lieu de become_virus()
 	elif body.is_in_group("humans") and not following_human:
 		print("Humain trouve un autre humain, le suit")
 		following_human = body
 
 # --- Ancienne fonction (gardée si besoin plus tard) ---
-func become_zombie() -> void:
-	if is_zombie:
+func become_viru() -> void:
+	if is_virus:
 		return
-	print("Humain touché ! (ancienne transfo en zombie, non utilisée ici)")
-	is_zombie = true
+	print("Humain touché ! (ancienne transfo en virus, non utilisée ici)")
+	is_virus = true
 	# Désactivée dans ce scénario : on ne transforme plus.
