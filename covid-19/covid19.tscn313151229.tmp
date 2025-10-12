@@ -1,0 +1,194 @@
+[gd_scene load_steps=27 format=3 uid="uid://rv83foyuqwap"]
+
+[ext_resource type="Script" uid="uid://ojr4827p8oto" path="res://covid19.gd" id="1_1yc2c"]
+[ext_resource type="PackedScene" uid="uid://d2p2b1x135t54" path="res://virus.tscn" id="2_xv1rh"]
+[ext_resource type="PackedScene" uid="uid://c0vnof6r7l7jx" path="res://humain.tscn" id="3_3kl1v"]
+[ext_resource type="PackedScene" uid="uid://g18pscfpwk83" path="res://maison.tscn" id="4_fmfnk"]
+[ext_resource type="PackedScene" uid="uid://cuv3adlxb3pdc" path="res://maison_d.tscn" id="5_1d54a"]
+[ext_resource type="ArrayMesh" uid="uid://c3fqoexi0ora3" path="res://addons/kaykit_city_builder_bits/Assets/obj/building_G.obj" id="6_3vh8m"]
+[ext_resource type="ArrayMesh" uid="uid://cpc7s53msr6at" path="res://addons/kaykit_city_builder_bits/Assets/obj/bench.obj" id="7_bjky1"]
+[ext_resource type="PackedScene" uid="uid://bi8nk0bko6vj8" path="res://arbre.tscn" id="8_htpoq"]
+[ext_resource type="ArrayMesh" uid="uid://7lwpls8w3amy" path="res://addons/kaykit_city_builder_bits/Assets/obj/road_junction.obj" id="9_24amq"]
+[ext_resource type="ArrayMesh" uid="uid://b02n1v2gvwigv" path="res://addons/kaykit_city_builder_bits/Assets/obj/car_police.obj" id="10_vprpl"]
+[ext_resource type="ArrayMesh" uid="uid://3fwolriiqd1v" path="res://addons/kaykit_city_builder_bits/Assets/obj/car_hatchback.obj" id="11_a2h80"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cbsfl"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_b266d"]
+radius = 0.500525
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dg77c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_70kl4"]
+albedo_color = Color(0.431373, 0.0392157, 0.933333, 0.0431373)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ovgec"]
+material = SubResource("StandardMaterial3D_70kl4")
+size = Vector2(150, 150)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ycdy4"]
+albedo_color = Color(0.5700402, 0.41354248, 0.19409761, 0.5568628)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6ed4g"]
+size = Vector3(1, 1.46924, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oxmct"]
+size = Vector3(150, 10, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tiku3"]
+size = Vector3(1, 10, 150)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wk1hq"]
+size = Vector3(1, 10, 150)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w48qg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vivmo"]
+albedo_color = Color(1, 1, 0.8509804, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2cqfq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yaehf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_074og"]
+
+[node name="Covid19" type="Node3D"]
+script = ExtResource("1_1yc2c")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.744603, 0.667508, 0, -0.667508, 0.744603, 0, 5.3755, 7.92645)
+
+[node name="Virus" parent="." instance=ExtResource("2_xv1rh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.35364, 1.00117, 7.12386)
+physics_material_override = SubResource("PhysicsMaterial_cbsfl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Virus"]
+shape = SubResource("CylinderShape3D_b266d")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Virus"]
+metadata/_edit_lock_ = true
+
+[node name="humain" parent="." instance=ExtResource("3_3kl1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.28337, 0.0219509, -8.16813)
+
+[node name="Quartier" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Quartier"]
+transform = Transform3D(18.7939, -6.8404, 0, 6.42788, 17.6604, -6.8404, 2.33956, 6.42788, 18.7939, -15.1947, 0, 8.98)
+shape = SubResource("BoxShape3D_dg77c")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Quartier"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13275146, -0.22689056, 26.396456)
+mesh = SubResource("PlaneMesh_ovgec")
+surface_material_override/0 = SubResource("StandardMaterial3D_ycdy4")
+
+[node name="mur1" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.5075, 0, -0.181492)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="mur1"]
+transform = Transform3D(150, 0, 0, 0, 10, 0, 0, 0, 1, -75.6156, 6.32676, -49.5139)
+shape = SubResource("BoxShape3D_6ed4g")
+
+[node name="mur2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 101.113)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="mur2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.11347, -0.12348175)
+shape = SubResource("BoxShape3D_oxmct")
+
+[node name="mur3" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="mur3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -75.0009, 4.8056, 25.8646)
+shape = SubResource("BoxShape3D_tiku3")
+
+[node name="mur4" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.1954, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="mur4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.76385, 25.439)
+shape = SubResource("BoxShape3D_wk1hq")
+
+[node name="Maison" parent="." instance=ExtResource("4_fmfnk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.808086, 0, 0)
+
+[node name="Maison2" parent="." instance=ExtResource("4_fmfnk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.458691, -0.32300568, 1.4099541)
+
+[node name="Maison3" parent="." instance=ExtResource("4_fmfnk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -79.67519, 1.0446682, 4.13237)
+
+[node name="MaisonD" parent="." instance=ExtResource("5_1d54a")]
+
+[node name="MaisonD2" parent="." instance=ExtResource("5_1d54a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5480118, 0.20588017, 29.971603)
+
+[node name="MaisonP" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MaisonP"]
+transform = Transform3D(0.1701917, 0, 7.99819, 0, 8, 0, -7.99819, 0, 0.1701917, -60.43224, 0, 80.48593)
+mesh = ExtResource("6_3vh8m")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MaisonP"]
+shape = SubResource("BoxShape3D_w48qg")
+metadata/_edit_lock_ = true
+
+[node name="Chaise" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.425026, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Chaise"]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, -25.129013, 0.431221, -41.971287)
+mesh = ExtResource("7_bjky1")
+surface_material_override/0 = SubResource("StandardMaterial3D_vivmo")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Chaise"]
+shape = SubResource("BoxShape3D_2cqfq")
+metadata/_edit_lock_ = true
+
+[node name="Arbre" parent="." instance=ExtResource("8_htpoq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.4182243, -7.0546417)
+
+[node name="Arbre2" parent="." instance=ExtResource("8_htpoq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.059383, -1.5420246, -6.83617)
+
+[node name="Arbre3" parent="." instance=ExtResource("8_htpoq")]
+transform = Transform3D(0.99995494, 0, 0.009494449, 0, 1, 0, -0.009494449, 0, 0.99995494, -48.52304, -0.70995903, -5.8783035)
+
+[node name="Parking" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Parking"]
+transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, -55.959732, 0, -10.619339)
+mesh = ExtResource("9_24amq")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parking"]
+shape = SubResource("BoxShape3D_yaehf")
+metadata/_edit_lock_ = true
+
+[node name="Voiture1" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Voiture1"]
+transform = Transform3D(-0.34660602, 0, 19.996996, 0, 20, 0, -19.996996, 0, -0.34660602, -55.185455, 1.9998226, -11.867203)
+mesh = ExtResource("10_vprpl")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Voiture1"]
+shape = SubResource("BoxShape3D_074og")
+metadata/_edit_lock_ = true
+
+[node name="Voiture2" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Voiture2"]
+transform = Transform3D(0.25620627, 0, 19.998358, 0, 20, 0, -19.998358, 0, 0.25620627, -55.189877, 1.3654022, -4.1099243)
+mesh = ExtResource("11_a2h80")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Voiture2"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.9839161, 0.100300774, 0.14781402, -0.17597167, 0.68650335, 0.70551205, -0.030711424, -0.7201757, 0.6931117, 25.849495, 63.743797, 113.657196)
+current = true
+
+[connection signal="body_entered" from="Virus" to="humain" method="_on_zombie_body_entered"]
