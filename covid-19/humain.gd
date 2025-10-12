@@ -73,6 +73,8 @@ func _process(delta: float) -> void:
 #if _restore_after_sec > 0.0:
 #_hit_timer.start(_restore_after_sec)
 # --- COLORATION ROUGE AU TOUCHER ---
+
+
 func mark_hit() -> void:
 	if is_zombie:
 		return
