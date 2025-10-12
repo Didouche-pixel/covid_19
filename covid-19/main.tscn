@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://rv83foyuqwap"]
+[gd_scene load_steps=28 format=3 uid="uid://rv83foyuqwap"]
 
 [ext_resource type="PackedScene" uid="uid://d2p2b1x135t54" path="res://zombie.tscn" id="1_3xhd6"]
 [ext_resource type="Script" uid="uid://ojr4827p8oto" path="res://main.gd" id="1_4bfd1"]
@@ -10,7 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://bi8nk0bko6vj8" path="res://arbre.tscn" id="9_dg77c"]
 [ext_resource type="ArrayMesh" uid="uid://7lwpls8w3amy" path="res://addons/kaykit_city_builder_bits/Assets/obj/road_junction.obj" id="10_ycdy4"]
 [ext_resource type="ArrayMesh" uid="uid://b02n1v2gvwigv" path="res://addons/kaykit_city_builder_bits/Assets/obj/car_police.obj" id="11_w48qg"]
+[ext_resource type="ArrayMesh" uid="uid://dh6kei8tn3j00" path="res://addons/kaykit_city_builder_bits/Assets/image/Coffin/fence.obj" id="12_dg77c"]
 [ext_resource type="ArrayMesh" uid="uid://3fwolriiqd1v" path="res://addons/kaykit_city_builder_bits/Assets/obj/car_hatchback.obj" id="12_vivmo"]
+[ext_resource type="ArrayMesh" uid="uid://g83xc7kmqukj" path="res://addons/kaykit_city_builder_bits/Assets/obj/watertower.obj" id="13_ycdy4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cbsfl"]
 
@@ -20,14 +22,11 @@ radius = 0.500525
 [sub_resource type="BoxShape3D" id="BoxShape3D_dg77c"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_70kl4"]
-albedo_color = Color(0.431373, 0.0392157, 0.933333, 0.0431373)
+albedo_color = Color(0.43137255, 0.36862746, 0.2784314, 0)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ovgec"]
 material = SubResource("StandardMaterial3D_70kl4")
 size = Vector2(150, 150)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ycdy4"]
-albedo_color = Color(0.5700402, 0.41354248, 0.19409761, 0.5568628)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6ed4g"]
 size = Vector3(1, 1.46924, 1)
@@ -137,7 +136,6 @@ shape = SubResource("BoxShape3D_dg77c")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Sol"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13275146, -0.22689056, 26.396456)
 mesh = SubResource("PlaneMesh_ovgec")
-surface_material_override/0 = SubResource("StandardMaterial3D_ycdy4")
 
 [node name="mur1" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.5075, 0, -0.181492)
@@ -254,6 +252,50 @@ mesh = ExtResource("12_vivmo")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.9839161, 0.100300774, 0.14781402, -0.17597167, 0.68650335, 0.70551205, -0.030711424, -0.7201757, 0.6931117, 25.849495, 63.743797, 113.657196)
 current = true
+
+[node name="barreaux" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="barreaux"]
+transform = Transform3D(20.5, 0, 0, 0, 1, 0, 0, 0, 1, 0.97652817, 0, 101.50738)
+mesh = ExtResource("12_dg77c")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="barreaux"]
+
+[node name="barreaux2" type="StaticBody3D" parent="."]
+transform = Transform3D(0.005689785, 0, 0.9999838, 0, 1, 0, -0.9999838, 0, 0.005689785, -25.868061, 0, 25.104769)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="barreaux2"]
+transform = Transform3D(20.500002, 0, 0, 0, 1, 0, 0, 0, 1.0000001, -0.06425476, 0, 101.51329)
+mesh = ExtResource("12_dg77c")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="barreaux2"]
+
+[node name="barreaux3" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -148.85825)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="barreaux3"]
+transform = Transform3D(20.5, 0, 0, 0, 1, 0, 0, 0, 1, 0.97652817, 0, 99.06695)
+mesh = ExtResource("12_dg77c")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="barreaux3"]
+
+[node name="barreaux4" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.018883366, 0, 0.99982166, 0, 1, 0, -0.99982166, 0, -0.018883366, -176.06122, 0, 28.170052)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="barreaux4"]
+transform = Transform3D(20.500002, 0, 0, 0, 1, 0, -2.9802322e-08, 0, 1.0000001, 1.0141735, 0, 99.51418)
+mesh = ExtResource("12_dg77c")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="barreaux4"]
+
+[node name="water_" type="StaticBody3D" parent="."]
+transform = Transform3D(0.8446645, 0, 0.5352962, 0, 1, 0, -0.5352962, 0, 0.8446645, -116.08871, 0, 61.759186)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="water_"]
+transform = Transform3D(10.000001, 0, 0, 0, 16.67, 0, 0, 0, 3.3400004, 47.85411, 1.5597725, 39.090565)
+mesh = ExtResource("13_ycdy4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="water_"]
 
 [connection signal="body_entered" from="Zombie" to="humain" method="_on_zombie_body_entered"]
 [connection signal="body_entered" from="Zombie4" to="humain" method="_on_zombie_body_entered"]
