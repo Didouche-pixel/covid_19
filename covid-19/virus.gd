@@ -1,6 +1,6 @@
 extends RigidBody3D
 
-#  contrôle physique et poursuite
+# --- Poursuite + contrôle physique ---
 @export var speed_max: float = 35.0
 @export var accel: float = 30.0
 @export var turn_speed: float = 15.0
@@ -17,7 +17,7 @@ var _wander: Vector3 = Vector3.ZERO            # direction erratique lissée
 var _retarget_timer: float = 0.0
 
 func _ready() -> void:
-	add_to_group("viruses")
+	add_to_group("virus")
 	linear_damp = 0.05
 	angular_damp = 0.05
 	if not body_entered.is_connected(_on_body_entered):
@@ -27,7 +27,7 @@ func _ready() -> void:
 func choose_target() -> void:
 	var humans := get_tree().get_nodes_in_group("humans")
 	if humans.size() > 0:
-		# Choix aléatoire simple pour briser la synchro entre viruses
+		# Choix aléatoire simple pour briser la synchro entre virus
 		target = humans[randi() % humans.size()] as Node3D
 
 func _physics_process(delta: float) -> void:
@@ -47,7 +47,7 @@ func _physics_process(delta: float) -> void:
 		if to_target.length() > 0.001:
 			pursuit_dir = to_target.normalized()
 
-	# SÉPARATION : pousse loin des viruses dans un rayon
+	# SÉPARATION : pousse loin des virus dans un rayon
 	var sep := _compute_separation()
 
 	# Direction finale pondérée (poursuite + séparation + wander)
@@ -69,7 +69,7 @@ func _compute_separation() -> Vector3:
 	var count := 0
 	var my_pos := global_transform.origin
 
-	for z in get_tree().get_nodes_in_group("viruses"):
+	for z in get_tree().get_nodes_in_group("virus"):
 		if z == self or not (z is Node3D):
 			continue
 		var other_pos := (z as Node3D).global_transform.origin
@@ -93,5 +93,5 @@ func attack_human(human: Node) -> void:
 
 func _on_body_entered(body: Node) -> void:
 	if body != null and body.is_in_group("humans"):
-		print("Virus a touché un humain sain")
+		print("Virus a touché un humain")
 		attack_human(body)
