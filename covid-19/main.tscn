@@ -1,8 +1,8 @@
-[gd_scene load_steps=27 format=3 uid="uid://rv83foyuqwap"]
+[gd_scene load_steps=28 format=3 uid="uid://rv83foyuqwap"]
 
-[ext_resource type="PackedScene" uid="uid://d2p2b1x135t54" path="res://zombie.tscn" id="1_3xhd6"]
 [ext_resource type="Script" uid="uid://ojr4827p8oto" path="res://main.gd" id="1_4bfd1"]
 [ext_resource type="PackedScene" uid="uid://c0vnof6r7l7jx" path="res://humain.tscn" id="2_5xkj4"]
+[ext_resource type="PackedScene" uid="uid://d2p2b1x135t54" path="res://zombie.tscn" id="2_efxa6"]
 [ext_resource type="PackedScene" uid="uid://g18pscfpwk83" path="res://maison.tscn" id="5_5vw27"]
 [ext_resource type="PackedScene" uid="uid://cuv3adlxb3pdc" path="res://maison_d.tscn" id="6_kek77"]
 [ext_resource type="ArrayMesh" uid="uid://c3fqoexi0ora3" path="res://addons/kaykit_city_builder_bits/Assets/obj/building_G.obj" id="7_4c57u"]
@@ -17,7 +17,7 @@
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_b266d"]
 radius = 0.500525
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_dg77c"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_efxa6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_70kl4"]
 albedo_color = Color(0.431373, 0.0392157, 0.933333, 0.0431373)
@@ -52,24 +52,15 @@ albedo_color = Color(1, 1, 0.8509804, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_074og"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_dg77c"]
+
 [node name="Main" type="Node3D"]
 script = ExtResource("1_4bfd1")
-
-[node name="Z" type="Label" parent="."]
-anchors_preset = -1
-anchor_right = 0.219
-anchor_bottom = 0.156
-offset_left = -2.0
-offset_top = -5.0
-offset_right = -0.28801
-offset_bottom = -0.0880051
-text = "Zombies: 0
-Huamins: 0"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.744603, 0.667508, 0, -0.667508, 0.744603, 0, 5.3755, 7.92645)
 
-[node name="Zombie" parent="." instance=ExtResource("1_3xhd6")]
+[node name="Zombie" parent="." instance=ExtResource("2_efxa6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.35364, 1.00117, 7.12386)
 physics_material_override = SubResource("PhysicsMaterial_cbsfl")
 
@@ -80,64 +71,21 @@ metadata/_edit_lock_ = true
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Zombie"]
 metadata/_edit_lock_ = true
 
-[node name="Zombie4" parent="." instance=ExtResource("1_3xhd6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.367, 1.00117, 9.00773)
-physics_material_override = SubResource("PhysicsMaterial_cbsfl")
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Zombie4"]
-shape = SubResource("CylinderShape3D_b266d")
-metadata/_edit_lock_ = true
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Zombie4"]
-metadata/_edit_lock_ = true
-
-[node name="Zombie3" parent="." instance=ExtResource("1_3xhd6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5436, 1.00117, 9.60235)
-physics_material_override = SubResource("PhysicsMaterial_cbsfl")
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Zombie3"]
-shape = SubResource("CylinderShape3D_b266d")
-metadata/_edit_lock_ = true
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Zombie3"]
-metadata/_edit_lock_ = true
-
-[node name="Zombie2" parent="." instance=ExtResource("1_3xhd6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.54827, 1.00117, 15.8626)
-physics_material_override = SubResource("PhysicsMaterial_cbsfl")
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Zombie2"]
-shape = SubResource("CylinderShape3D_b266d")
-metadata/_edit_lock_ = true
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Zombie2"]
-metadata/_edit_lock_ = true
-
 [node name="humain" parent="." instance=ExtResource("2_5xkj4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.28337, 0.0219509, -8.16813)
-
-[node name="humain5" parent="." instance=ExtResource("2_5xkj4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.71554, 0, -11.3198)
-
-[node name="humain4" parent="." instance=ExtResource("2_5xkj4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.86698, 0, 0.0938053)
-
-[node name="humain3" parent="." instance=ExtResource("2_5xkj4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9964, 0, 11.7307)
-
-[node name="humain2" parent="." instance=ExtResource("2_5xkj4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6833, 0, -6.67163)
 
 [node name="Sol" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sol"]
 transform = Transform3D(18.7939, -6.8404, 0, 6.42788, 17.6604, -6.8404, 2.33956, 6.42788, 18.7939, -15.1947, 0, 8.98)
-shape = SubResource("BoxShape3D_dg77c")
+shape = SubResource("BoxShape3D_efxa6")
+metadata/_edit_lock_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Sol"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13275146, -0.22689056, 26.396456)
 mesh = SubResource("PlaneMesh_ovgec")
 surface_material_override/0 = SubResource("StandardMaterial3D_ycdy4")
+metadata/_edit_lock_ = true
 
 [node name="mur1" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.5075, 0, -0.181492)
@@ -159,20 +107,12 @@ shape = SubResource("BoxShape3D_oxmct")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -75.0009, 4.8056, 25.8646)
 shape = SubResource("BoxShape3D_tiku3")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+[node name="mur4" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.1954, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="mur4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.76385, 25.439)
 shape = SubResource("BoxShape3D_wk1hq")
-
-[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
-emitting = false
-amount = 20
-one_shot = true
-explosiveness = 1.0
-emission_shape = 1
-emission_sphere_radius = 1.0
 
 [node name="Maison" parent="." instance=ExtResource("5_5vw27")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.808086, 0, 0)
@@ -248,14 +188,14 @@ metadata/_edit_lock_ = true
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Voiture2"]
 transform = Transform3D(0.25620627, 0, 19.998358, 0, 20, 0, -19.998358, 0, 0.25620627, -55.189877, 1.3654022, -4.1099243)
 mesh = ExtResource("12_vivmo")
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Voiture2"]
+shape = SubResource("BoxShape3D_dg77c")
+metadata/_edit_lock_ = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.9839161, 0.100300774, 0.14781402, -0.17597167, 0.68650335, 0.70551205, -0.030711424, -0.7201757, 0.6931117, 25.849495, 63.743797, 113.657196)
 current = true
 
 [connection signal="body_entered" from="Zombie" to="humain" method="_on_zombie_body_entered"]
-[connection signal="body_entered" from="Zombie4" to="humain" method="_on_zombie_body_entered"]
-[connection signal="body_entered" from="Zombie3" to="humain" method="_on_zombie_body_entered"]
-[connection signal="body_entered" from="Zombie2" to="humain" method="_on_zombie_body_entered"]
