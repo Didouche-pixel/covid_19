@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyu1mqxpvm188"]
+
+[ext_resource type="ArrayMesh" uid="uid://dh6kei8tn3j00" path="res://addons/kaykit_city_builder_bits/Assets/image/Coffin/fence.obj" id="1_hsy3x"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ycdy4"]
+
+[node name="Fence" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(20.5, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = ExtResource("1_hsy3x")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ycdy4")
+metadata/_edit_lock_ = true

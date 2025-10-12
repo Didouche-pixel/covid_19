@@ -1,8 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://rv83foyuqwap"]
+[gd_scene load_steps=29 format=3 uid="uid://bfknlyfr3a4o7"]
 
-[ext_resource type="Script" uid="uid://ojr4827p8oto" path="res://main.gd" id="1_4bfd1"]
+[ext_resource type="Script" uid="uid://ojr4827p8oto" path="res://covid19.gd" id="1_4bfd1"]
 [ext_resource type="PackedScene" uid="uid://c0vnof6r7l7jx" path="res://humain.tscn" id="2_5xkj4"]
-[ext_resource type="PackedScene" uid="uid://d2p2b1x135t54" path="res://zombie.tscn" id="2_efxa6"]
+[ext_resource type="PackedScene" uid="uid://d2p2b1x135t54" path="res://virus.tscn" id="2_efxa6"]
 [ext_resource type="PackedScene" uid="uid://g18pscfpwk83" path="res://maison.tscn" id="5_5vw27"]
 [ext_resource type="PackedScene" uid="uid://cuv3adlxb3pdc" path="res://maison_d.tscn" id="6_kek77"]
 [ext_resource type="ArrayMesh" uid="uid://c3fqoexi0ora3" path="res://addons/kaykit_city_builder_bits/Assets/obj/building_G.obj" id="7_4c57u"]
@@ -11,6 +11,7 @@
 [ext_resource type="ArrayMesh" uid="uid://7lwpls8w3amy" path="res://addons/kaykit_city_builder_bits/Assets/obj/road_junction.obj" id="10_ycdy4"]
 [ext_resource type="ArrayMesh" uid="uid://b02n1v2gvwigv" path="res://addons/kaykit_city_builder_bits/Assets/obj/car_police.obj" id="11_w48qg"]
 [ext_resource type="ArrayMesh" uid="uid://3fwolriiqd1v" path="res://addons/kaykit_city_builder_bits/Assets/obj/car_hatchback.obj" id="12_vivmo"]
+[ext_resource type="PackedScene" uid="uid://cyu1mqxpvm188" path="res://fence.tscn" id="12_xv1rh"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cbsfl"]
 
@@ -27,7 +28,7 @@ material = SubResource("StandardMaterial3D_70kl4")
 size = Vector2(150, 150)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ycdy4"]
-albedo_color = Color(0.5700402, 0.41354248, 0.19409761, 0.5568628)
+albedo_color = Color(0.4129506, 0.3740509, 0.30569953, 0)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6ed4g"]
 size = Vector3(1, 1.46924, 1)
@@ -54,34 +55,34 @@ albedo_color = Color(1, 1, 0.8509804, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dg77c"]
 
-[node name="Main" type="Node3D"]
+[node name="Covid19" type="Node3D"]
 script = ExtResource("1_4bfd1")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.744603, 0.667508, 0, -0.667508, 0.744603, 0, 5.3755, 7.92645)
 
-[node name="Zombie" parent="." instance=ExtResource("2_efxa6")]
+[node name="Virus" parent="." instance=ExtResource("2_efxa6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.35364, 1.00117, 7.12386)
 physics_material_override = SubResource("PhysicsMaterial_cbsfl")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Zombie"]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Virus"]
 shape = SubResource("CylinderShape3D_b266d")
 metadata/_edit_lock_ = true
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Zombie"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Virus"]
 metadata/_edit_lock_ = true
 
 [node name="humain" parent="." instance=ExtResource("2_5xkj4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.28337, 0.0219509, -8.16813)
 
-[node name="Sol" type="StaticBody3D" parent="."]
+[node name="Quartier" type="StaticBody3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Sol"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Quartier"]
 transform = Transform3D(18.7939, -6.8404, 0, 6.42788, 17.6604, -6.8404, 2.33956, 6.42788, 18.7939, -15.1947, 0, 8.98)
 shape = SubResource("BoxShape3D_efxa6")
 metadata/_edit_lock_ = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Sol"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Quartier"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13275146, -0.22689056, 26.396456)
 mesh = SubResource("PlaneMesh_ovgec")
 surface_material_override/0 = SubResource("StandardMaterial3D_ycdy4")
@@ -198,4 +199,16 @@ metadata/_edit_lock_ = true
 transform = Transform3D(0.9839161, 0.100300774, 0.14781402, -0.17597167, 0.68650335, 0.70551205, -0.030711424, -0.7201757, 0.6931117, 25.849495, 63.743797, 113.657196)
 current = true
 
-[connection signal="body_entered" from="Zombie" to="humain" method="_on_zombie_body_entered"]
+[node name="Fence" parent="." instance=ExtResource("12_xv1rh")]
+transform = Transform3D(0.9999997, 0, -0.0008028522, 0, 1, 0, 0.0008028522, 0, 0.9999997, 0.5977459, -0.7000904, 100.81091)
+
+[node name="Fence2" parent="." instance=ExtResource("12_xv1rh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6460552, -0.5567131, -48.92605)
+
+[node name="Fence3" parent="." instance=ExtResource("12_xv1rh")]
+transform = Transform3D(0.009040715, 0, -0.9999591, 0, 1, 0, 0.9999591, 0, 0.009040715, -73.942184, -0.5865631, 25.385452)
+
+[node name="Fence4" parent="." instance=ExtResource("12_xv1rh")]
+transform = Transform3D(0.0009424519, 0, 0.9999997, 0, 1, 0, -0.9999997, 0, 0.0009424519, 74.821945, 0.0029535294, 25.368141)
+
+[connection signal="body_entered" from="Virus" to="humain" method="_on_zombie_body_entered"]
