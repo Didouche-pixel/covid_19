@@ -63,6 +63,18 @@ func _process(delta: float) -> void:
 	apply_torque_impulse(rotation_torque)
 	apply_central_impulse(direction * speed)
 
+# --- COLORATION ROUGE AU TOUCHER ---
+# --- COLORATION ROUGE AU TOUCHER ---
+#func mark_hit() -> void:
+#if is_zombie:
+# return
+#print("Humain touché ! Devient rouge.")
+#_tint_meshes(self, Color(1, 0, 0))
+#if _restore_after_sec > 0.0:
+#_hit_timer.start(_restore_after_sec)
+# --- COLORATION ROUGE AU TOUCHER ---
+
+
 func mark_hit() -> void:
 	if est_virus:
 		return

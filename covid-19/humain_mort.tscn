@@ -9,11 +9,11 @@ albedo_color = Color(1.2852054, 0, 0, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ycdy4"]
 
 [node name="Humain_mort" type="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 0.27538574, 0.9613338, 0, -0.9613338, 0.27538574, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.029230148, 0.99957275, 0, -0.99957275, 0.029230148, 0, 0, 0)
 script = ExtResource("1_27ncu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 mesh = ExtResource("1_v5otn")
 surface_material_override/0 = SubResource("StandardMaterial3D_w48qg")
 metadata/_edit_lock_ = true

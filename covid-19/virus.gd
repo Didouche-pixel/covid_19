@@ -1,7 +1,7 @@
 extends RigidBody3D
 
 # --- Poursuite + contrôle physique ---
-@export var speed_max: float = 35.0
+@export var speed_max: float = 20.0
 @export var accel: float = 30.0
 @export var turn_speed: float = 15.0
 var target: Node3D = null
