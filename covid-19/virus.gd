@@ -1,79 +1,97 @@
 extends RigidBody3D
-# Virus : poursuit l'humain sain le plus proche et l'infecte au contact.
 
-# Réglages : vitesse de poursuite et rotation
-@export var chase_speed: float = 1.8
-@export var turn_speed: float = 8.0
+# --- Poursuite + contrôle physique ---
+@export var speed_max: float = 20.0
+@export var accel: float = 30.0
+@export var turn_speed: float = 15.0
+var target: Node3D = null
 
-# Texture du virus
-@export var tex_virus: Texture2D
+# --- DISPERSION ---
+@export var separation_radius: float = 6.0     # rayon de "bulle perso"
+@export var separation_weight: float = 1.5     # poids de la séparation dans la direction finale
+@export var wander_weight: float = 0.25        # poids du wander (bruit de direction)
+var _wander: Vector3 = Vector3.ZERO            # direction erratique lissée
 
-# Bornes (zone de jeu)
-var min_x: float = -50.0
-var max_x: float =  50.0
-var min_z: float = -50.0
-var max_z: float =  50.0
-
-# Référence au Mesh
-@onready var mesh: MeshInstance3D = $MeshInstance3D
+# --- Retarget (pour éviter que tous pick la même personne trop longtemps) ---
+@export var retarget_interval: float = 1.2
+var _retarget_timer: float = 0.0
 
 func _ready() -> void:
-	add_to_group("virus")         # pour être reconnu comme virus
-	set_contact_monitor(true)     # activer détection collisions
-	set_max_contacts_reported(6)
-	_apply_texture(tex_virus)
+	add_to_group("virus")
+	linear_damp = 0.05
+	angular_damp = 0.05
+	if not body_entered.is_connected(_on_body_entered):
+		body_entered.connect(_on_body_entered)
+	choose_target()
+
+func choose_target() -> void:
+	var humans := get_tree().get_nodes_in_group("humans")
+	if humans.size() > 0:
+		# Choix aléatoire simple pour briser la synchro entre virus
+		target = humans[randi() % humans.size()] as Node3D
 
 func _physics_process(delta: float) -> void:
-	# Cherche l'humain sain le plus proche
-	var target: RigidBody3D = _closest_healthy()
-	if target != null:
-		# Direction vers la cible (maintenant bien typée)
-		var dir: Vector3 = (target.global_transform.origin - global_transform.origin).normalized()
-		
-		# Rotation vers la cible
-		var torque: Vector3 = (dir.cross(Vector3.UP)).normalized() * turn_speed
-		apply_torque_impulse(torque)
+	# Retarget périodique pour éviter la cohorte
+	_retarget_timer -= delta
+	if _retarget_timer <= 0.0:
+		choose_target()
+		_retarget_timer = retarget_interval
 
-		# Avance vers la cible
-		apply_central_impulse(dir * chase_speed)
+	# WANDER (petit bruit lissé sur le plan XZ)
+	var jitter := Vector3(randf() * 2.0 - 1.0, 0.0, randf() * 2.0 - 1.0).normalized() * 0.5
+	_wander = (_wander + jitter * delta * 4.0).limit_length(1.0)
 
-	# Wrap aux bords de la zone
-	if position.x > max_x: position.x = min_x
-	if position.x < min_x: position.x = max_x
-	if position.z > max_z: position.z = min_z
-	if position.z < min_z: position.z = max_z
+	var pursuit_dir := Vector3.ZERO
+	if target != null and target.is_inside_tree():
+		var to_target := (target.global_transform.origin - global_transform.origin)
+		if to_target.length() > 0.001:
+			pursuit_dir = to_target.normalized()
 
-# Quand le virus touche un humain sain → infection
-func _on_body_entered(body: Node) -> void:
-	if body.is_in_group("homme"):
-		body.call_deferred("become_infected")
+	# SÉPARATION : pousse loin des virus dans un rayon
+	var sep := _compute_separation()
 
-# --- Helpers ---
-func _closest_healthy() -> RigidBody3D:
-	# Retourne l'humain sain le plus proche (RigidBody3D)
-	var best: RigidBody3D = null
-	var best_d: float = 1e9
-	var humans := get_tree().get_nodes_in_group("homme")
-	for h in humans:
-		var hb := h as RigidBody3D
-		if hb != null and hb.is_inside_tree():
-			var d: float = global_transform.origin.distance_to(hb.global_transform.origin)
-			if d < best_d:
-				best_d = d
-				best = hb
-	return best
-
-func _apply_texture(tex: Texture2D) -> void:
-	if tex == null:
+	# Direction finale pondérée (poursuite + séparation + wander)
+	var final_dir := (pursuit_dir + sep * separation_weight + _wander * wander_weight)
+	if final_dir.length() < 0.001:
 		return
-	var mat := mesh.get_active_material(0)
-	if mat == null:
-		mat = StandardMaterial3D.new()
-	else:
-		mat = mat.duplicate()
-	mat.albedo_texture = tex
-	mat.albedo_color = Color.WHITE
-	mesh.set_surface_override_material(0, mat)
+	final_dir = final_dir.normalized()
 
-func _set_bounds(a: float, b: float, c: float, d: float) -> void:
-	min_x = a; max_x = b; min_z = c; max_z = d
+	# Rotation vers la direction finale
+	var rotation_torque: Vector3 = (final_dir.cross(Vector3.UP)).normalized() * turn_speed
+	apply_torque_impulse(rotation_torque)
+
+	# Vitesse désirée + accélération
+	var desired_vel := final_dir * speed_max
+	linear_velocity = linear_velocity.move_toward(desired_vel, accel * delta)
+
+func _compute_separation() -> Vector3:
+	var sum := Vector3.ZERO
+	var count := 0
+	var my_pos := global_transform.origin
+
+	for z in get_tree().get_nodes_in_group("virus"):
+		if z == self or not (z is Node3D):
+			continue
+		var other_pos := (z as Node3D).global_transform.origin
+		var to_me := my_pos - other_pos
+		var d := to_me.length()
+		if d > 0.001 and d < separation_radius:
+			# plus c'est proche, plus la répulsion est forte
+			var strength := 1.0 - (d / separation_radius)   # 1 à très proche -> 0 à la limite
+			sum += (to_me / d) * strength                   # normalisé * force
+			count += 1
+
+	if count > 0:
+		sum /= float(count)
+	# clamp pour éviter des pics violents
+	return sum.limit_length(1.0)
+
+func attack_human(human: Node) -> void:
+	if human.is_in_group("humans"):
+		print("Virus attaque l'humain !")
+		human.call("mark_hit")
+
+func _on_body_entered(body: Node) -> void:
+	if body != null and body.is_in_group("humans"):
+		print("Virus a touché un humain")
+		attack_human(body)
