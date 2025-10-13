@@ -1,0 +1,19 @@
+Projet Covid19 – Simulation d’Infection Humaine
+
+Objectif du projet
+    Ce projet a pour but de simuler la propagation d’un virus dans un environnement 3D à l’aide du moteur Godot Engine.
+    L’utilisateur peut observer le comportement d’un groupe d’humains se déplaçant librement, ainsi que des virus capables d’infecter les humains au contact.
+    L’expérience vise à modéliser, de manière simplifiée, la dynamique de contamination et de mortalité.
+    
+Concept général
+  Le monde du jeu est un quartier 3D, on y trouve trois types d’agents :
+    Humains sains — se déplacent aléatoirement dans l’espace.
+    Virus — poursuivent les humains proches pour les contaminer.
+    Cadavres (humains morts) — remplacent les humains infectés après un certain délai.
+    
+Fonctionnement du simulateur
+  Les humains se déplacent librement avec un comportement semi-aléatoire.
+  Lorsqu’ils entrent en contact avec un virus, ils deviennent rouges (état infecté).
+  Une fois infectés, ils survivent environ 5 secondes, avant de mourir et d’être remplacés par un cadavre.
+  Les virus se déplacent eux aussi dans le quartier et cherchent activement les humains sains les plus proches à infecter.
+  Les cadavres restent sur place, témoignant de la progression de l’épidémie.
